@@ -1,0 +1,72 @@
+body{
+    background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcS3Bi3xRyRBgcXKzzYcIfpvi35GkfH3eZgGq0BIb2bD2XwAwfdg&usqp=CAU"); 
+    background-color: pink;  
+    height: 1024px;
+    background-position: center;  
+    background-repeat: no-repeat;  
+    background-size: cover;
+}
+img{
+  padding: 16px;
+  text-align: left;
+  width: 30%;
+  max-width: 100%;
+  height: auto;
+}
+/* Bordered form */
+h2{
+    color: navy;
+    text-align:center;
+}
+form {
+    text-align: center;
+    align-items: center;
+}
+  
+  /* Full-width inputs */
+  input[type=text], input[type=password] {
+    width: 30%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    /*box-sizing: border-box;*/
+  }
+  /* Set a style for all buttons */
+  button {
+    background-color: #219725;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 10%;
+    opacity:0.5;
+  }
+  
+  /* Add a hover effect for buttons */
+  button:hover {
+    opacity: 1;
+  }
+  footer{
+    color:teal;
+  }
+  
+Add padding to containers */
+  .container {
+    padding: 16px;
+  }
+  
+  /* The "Forgot password" text */
+  span.psw {
+    float: right;
+    padding-top: 16px;
+  }
+  
+  /* Change styles for span and cancel button on extra small screens */
+  @media screen and (max-width: 300px) {
+    span.psw {
+      display: block;
+      float: none;
+    }
+  }

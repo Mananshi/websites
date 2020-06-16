@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Home Page</title>
+  <link href="home.css" rel="stylesheet" type="text/css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <link href="https://fonts.googleapis.com/css?family=Varela+Round" rel="stylesheet">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script type="text/javascript">
+    $(document).ready(function(){
+      var dropdown = $(".navbar-right .dropdown");
+      var toogleBtn = $(".navbar-right .dropdown-toggle");
+      
+      // Toggle search and close icon for search dropdown
+      dropdown.on("show.bs.dropdown", function(e){
+        toogleBtn.toggleClass("hide");
+      });
+      dropdown.on("hide.bs.dropdown", function(e){
+        toogleBtn.addClass("hide");
+        toogleBtn.first().removeClass("hide");
+      });
+    });
+  </script>
+</head>
+<body>
+  <nav class="navbar navbar-default navbar-expand-lg navbar-light">
+    <div class="navbar-header d-flex col">
+      <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAVQAAACUCAMAAAD70yGHAAAAwFBMVEX///9/ERRER0d4AAB7AAB0AAB8AAB+DA+EHiB9AQjPs7Swf3/j0tP07OysdnfKqqqVSUulamuPOzzEoaH8+Pju4+SgYGGKLS84PDz28vK2iovVv8AuMjIzNzecnZ0+QUGur69RVFTMzc2jpKR4enqBg4MpLS1eYGDl5eW9vr7IyMiRk5NucHCNjo7W1tZuAABXWVkfJCRwcnK1trYhJiZmAABLTk7m19eJKCrdyMgWHBxeAADf39+7lpebVliONjidGRMzAAALV0lEQVR4nO2dDVuiTBfHWdDqcWurjWooYFB5FURL114e277/t7rnzAyIgail1O6e/7XXyjBnxvxxmDnzIioKCoVCoVAoFAqFQqFQKBQKhUKhUCgUCoVCoVAoFAqFQqFQKBQKhUKhyuocHK1X67JQYpMCh98/7QN9BXW0w/VqnxRKbFJA+9ehfluv1kXnlDurftrpHGxSAKFuAEkbdcD6ZKRtZo9Qvx201yqDut5SQ6gA9eDcOFkrnZuvtzMuNIQKCH7sssZThIpQ9yCEugch1D1oAfX48edKXV9k9k/XNVanYIFQC1Cf2v9bKe0ls6+14ugRatFTa8L6w29Hh2Bzxob1q60QqtQy1Ja2Su0R2Ly2Vxq0EGquJajsQF8psKnJZRUhVKm3UD9SEUKVQqh7EELdgxDqHlQB9fjbdUmPV8L85aicd3QqK0KoUlVQ2+X1kdZr50lRLk+vWhVrJxeyIoQqVQVVq4pXRyzv9lc5Tm19eydUx1NnM9L72J9vuIE6U8erMrobVKG7yYaWG6sSautm8wputW2gDsNCwldV64NQFaVPVFpJZMIyZhtVMbE2tdxQzUI17oaF1K6gVruZsyqjJIZf/YOh9ompL1IIdZW2gqqqpL9IIdRV2gZqz1RVukhmUI2SoZH5s7Gcpy8nIXcZasE+g/q2iL6UhhqbhPo0KvbyR3DqR7H3b3OrbaC6XYZxkCcBapoG42dzHEE69JIgCIaKF5g+jdmJ4Zj6lpv3bX016ZOuI1O6TZ+7Qa/gkJPA6we+agtsPEO/D+7M+1QWGSRJ372jXl6jrT53x1HUJFStVVzP/7+uLK/va9tCNTz259MgTzOo1GXwUkv1RavgEUqDhDlPl5Ku3p2z60CpKXxtTqyEgfctEUCFFjGZm09maga1a8LrjBKVJwHqzIXzVNbumj68B6W+oBpSYrJLHLFL3RzU9ktdyVuRvQXUfqqw+9+cZ2mAyqMB9qF8Ts6j7JCbMvomfPQBC3c8OGNYKgF/7qqEl2EGCbzGVEKNiWoZvAprAmmAytsadiV9uD0ik7c2EGrxGhWViivcb9JTdw2VudiQZp9IKXRUATvgDQAjQsG5gIhgxrxYJXDgMlhz8QoRhE1U4sD5vE0NBM24UIXICE1xpRh1uIbsMokLxwxEt9lom7pjqL2++IBm1nUUoYqP55WIAFSfQTR8WZBdFiikZq1zDjX2yTQUUJOlKphTqyZrVgdTMo0EVAtOj1Xh+380VBeYMH8itjyxBip3J4AKntkTr7oSs7Z0ohgmdHJgsOj9Jza0FzaVzfYCKmsgCLQIPRveDaD62dvz6/IHQzXu4f9Bdjsr20GNoFzMZcc97vFvobK3GNgeq+stVDUPj/Ve30sYY1MRN414+z8YqtNPQVbWfm4P1VxUVgU16vo0rfLUDGqamNMBv6xQE3f2P91Tg0HENGBtYjartA3UtNgYM5fL3WzRporOPa68/eE6Rj6Fd8mgLm5/Z+dQ263DXUM9bLXLSwipbEkBhymi8W2g8t5GBu3zsNDL2JJd6AvDJagiYoVGNBR9W68AlbUDvKndfUj18HJxlO1QOfwY1MMM6tnFy23J3MvcLAe3HVTHyicKICabWLLDS2ScmhnaYnxhsAKsSwML1lTweMBfgmpA3MrHbRCl7RYq07W2G089agmo7fMKaz3JjuamcJwtoSqJJRAoPQf+H1PeikColXsqtLJQcswGb4oTzJ27Aa+LwqgAfB1CW96QsPdk/whnyavYNdRHTd6sT+KuZWP+raCO+GtnJL8XVAVVV5xI0eXhmBATBkX6lBA+1OFnuNu5FrF4kNA3CeHDoZ5PyFQ4eez70GxEYkpWD0xWJgyGFiGciGtS2p3YNmWBbD8wlD4bKsxpqITEmvFr6PiUEsfxGEsy9OBqJqYVsypsVoW6NbZ6nV9JeLcjjkM3juSESj3UkRj7P4p5n86vB3n+d7mYDYGQww+d2AYN04gfxLHSG4ozRigP5ro4YKFTLIxE0bAf3A+H+WThwJ3NhnpP1MbSk2Q89lIldNkLoziAP0uPA9WVwYbSYzksYQzH43tRy8Drzjwj5e+xmOjZqU46x+LglePSX2pXmjo33IFuf4rkZac8g4cq6/K4NveyLheFakBii5/yUA6MCjqWfqzXGaEuLyTFA96YGje1qyqdH/z+7xyK5MPLSZ31v6azVwlP9v7G5Va9/9Elp5n3/p3H925PCdeb1Mj4Uh3ldRan3r4zThXB/0g2B9XB/3rpY9+arzdbpaE/dd5feueSUJ9GrY+NqDRx4r1Qbau4frWt5mxYNP0qvvp0/uNo1xMqrz/OT5dtY2/W7Y5F3G4P792hUhasdlRsitpQMPj0JdSo3nT/6rRbO5/6O2yVHqIAkxq5G0aVOyhC05p+YFQTmH62+LXrcfzWamg+FSaVF1Cr2em9D/VUab66//yRanahLwR1R+pZ/j6r30SfBZXPq0yUfqImMW8K+RRKpGRzKbDYzF6Y7+pOMkw8fh3EHIySul2xbSXyhrEbz7Mc2JcRJ6ZK7DhSxLwNTMXIehrUp3kqzOkl7lwZmETM6EcmsaADCyxCpClMrfYsWFcmJp+PDaeEzOZ0RiksMgd8DtZ+hllDA+YRIUmytaxkUU8+l9uQPg0qzD5TGOJmyx+wJQhmodN8vQU6NBYqweJrTC3Ig8W6cQLz3H7IaPLaPAqhFF/Gg2QOdb6oZ6/NTYU+E6qY5A/k1H4GFRZIxHYIyB6LrTkTwpFxdMxxZ35XUeT+n3uzGiqskoh6mnbUeqg3urHQCYwEF9I7O4QK938OdS43XM0dEYpBpDSw+FoJoANjHTzQUolqs4MISldAzVw17SsNqxaqVtzl19KVn9p7d/1tA5W7qivW9yKwSnup7fOmFdBlWzH4kh+xLPE1ggqomau6jc+j1UA9XnpewhmcunktPVlhD1BhyGmGOiRgo5rbY0rTVN7k+WqSocJWM1VslKyCyjduzY18Q1xjamgnNXy+fL/zBEZUNVCVe9gb2M9OFsa0gK4wXnK6JmHu6qfVULmrinqaVVPb0/3CxnQbIss6qOCqhGdCm+oualmCOmcOH0b3Jl/eroQKy9ak8W6qOajM+bINJgpvB+qg8k2oYtQZ0KzZsI1lqOGdz83D7hJUWtxz5dEdfFVjezUFlTlf5nIpv59roTIXkxNWzFU5KzbUUt5AncqGYfI8L0BlVwGgDrJ6PmN2pRrq92IslcVQsCOgfLaz4Qa1nkVMvvUnEvdjalJxhwdE7MGPTBHgc3nmRB6l1OcjJm5r+HTx3TznWWzPGsOLznK4h/amlEWy2bjUM52dYNpOK76bWn4u4i/x3dSK5yVuuOtPd+7VOxLIrQ19z2XyjLl4dZQYDrxsx1VYmGlygiC2xT5ybjzM/XnoxvHQ49tWRDVwq/cS4ifZEoJx9xnrkpXfoj4oqfV4/KAoJ0/nWjlvL9+i3lGXrTcfTymVUB9+X5Ull7FOK/J+d2RFX+yr6XBd+h9Y9Xq//tonU+iqT8Lmh/1cfy3UAQy+Zul6wz3or4Ua+oT48Xq7feivhaqEffsT4n6uJagH5yeXKwU2q7NPLr4a1E/U8rP+ap74PYKA72z1g741fNZfrg2fSnl99Rtsvv8+w6dSrlfx+anluD6P73NIdVZthCq0gPpwdb5a+ZN+j2usrvhOTISKz6TehxDqHoRQ9yCEugdxqFcPx2vF96Dr6+0ebloIFaLT1c/3Xjw/Mf/ppHVq4a/8bPZ7VBr+HtU22giqdvtwzNc52O3/0EKo69Sp+YWJXO3iNya1DQr847/xd/vzbL1ei98726TAWe1+QRQKhUKhUCgUCoVCoVAoFAqFQqFQKBQKhUKhUCgUCoVqUv8BoYO0UiVSaWoAAAAASUVORK5CYII=">  		
+      <button type="button" data-target="#navbarCollapse" data-toggle="collapse" class="navbar-toggle navbar-toggler ml-auto">
+        <span class="navbar-toggler-icon"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <!-- Collection of nav links, forms, and other content for toggling -->
+    <div id="navbarCollapse" class="collapse navbar-collapse justify-content-start">
+      <ul class="nav navbar-nav">
+        <li class="nav-item active"><a href="home.html" class="nav-link"><i class="fa fa-home"></i>Home</a></li>			
+        <li class="nav-item dropdown">
+          <a data-toggle="dropdown" class="nav-link dropdown-toggle" href="#"><i class="fa fa-bars"></i>Menu <b class="caret"></b></a>
+          <ul class="dropdown-menu">					
+            <li><a href="events.html" class="dropdown-item">Upcoming Events</a></li>
+            <li><a href="request.html" class="dropdown-item">Send Request</a></li>
+            <li><a href="home.html" class="dropdown-item ">Available Time-Slots</a></li>
+          </ul>
+        </li>
+        <li class="nav-item"><a href="#" class="nav-link"><i class="fa fa-user"></i>Contact</a></li>
+        <li class="nav-item"><a href="#" class="nav-link"><input type="date" id="datepicker" style="width:125px">Calendar</a></li>
+      </ul>		
+      <ul class="nav navbar-nav navbar-right ml-auto">			
+        <li class="nav-item dropdown">
+          <a data-toggle="dropdown" class="nav-link dropdown-toggle" href="#"><i class="fa fa-search"></i></a>
+          <a data-toggle="dropdown" class="nav-link dropdown-toggle hide" href="#"><i class="fa fa-close"></i></a>
+          <ul class="dropdown-menu">
+            <li>
+                <form>
+                  <div class="input-group search-box">								
+                    <input type="text" id="search" class="form-control" placeholder="Search here">
+                      <span class="input-group-btn">
+                        <button type="button" class="btn btn-primary" ><i class="fa fa-search"></i></button>
+                      </span>
+                  </div>
+                </form>                        
+            </li>
+          </ul>
+        </li>
+        <li type="button" class="nav-item" data-toggle="tooltip" data-placement="bottom" title="Facebook"><a href="#" class="nav-link"><i class="fa fa-facebook"></i></a></li>
+        <li type="button" class="nav-item" data-toggle="tooltip" data-placement="bottom" title="Instagram"><a href="#" class="nav-link"><i class="fa fa-instagram"></i></a></li>
+        <li type="button" class="nav-item" data-toggle="tooltip" data-placement="bottom" title="Logout"><a href="#" class="nav-link"><i class="fa fa-sign-out"></i></a></li>
+      </ul>
+    </div>
+  </nav>
+  <div class="table-responsive">
+    <h2>Available Rooms</h2>
+    <table id="customers">
+        <tr>
+          <th>Room No.</th>
+          <th>Time Slot</th>
+        </tr>
+        <tr>
+          <td>105</td>
+          <td>9-12,5:30-7:00</td>
+        </tr>
+        <tr>
+          <td>009</td>
+          <td>9:30-11:00,4-5:30</td>
+        </tr>
+        <tr>
+          <td>115</td>
+          <td>full day</td>
+        </tr>
+      
+    </table>
+  </div>
+</body>
+</html>
+
