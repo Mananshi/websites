@@ -1,10 +1,5 @@
 body{
-    background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcS3Bi3xRyRBgcXKzzYcIfpvi35GkfH3eZgGq0BIb2bD2XwAwfdg&usqp=CAU"); 
-    background-color: pink;  
-    height: 1024px;
-    background-position: center;  
-    background-repeat: no-repeat;  
-    background-size: cover;
+   background-color:floralwhite;
 }
 img{
   padding: 16px;
@@ -20,12 +15,12 @@ h2{
 }
 form {
     text-align: center;
-    align-items: center;
-}
+  }
   
   /* Full-width inputs */
   input[type=text], input[type=password] {
-    width: 30%;
+    background-color: white;
+    width: 40%;
     padding: 12px 20px;
     margin: 8px 0;
     display: inline-block;
@@ -55,6 +50,8 @@ form {
 Add padding to containers */
   .container {
     padding: 16px;
+    border-width: 20%;
+    border: 2px solid black;
   }
   
   /* The "Forgot password" text */

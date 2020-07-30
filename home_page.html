@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	{% load static %}
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Home Page</title>
+	<link href="https://fonts.googleapis.com/css?family=Varela+Round" rel="stylesheet">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<link href="{% static 'home.css' %}" rel="stylesheet" type="text/css">
+	<script src="{% static 'home.js'%}"></script>
+</head> 
+<body style="background-color:azure;">
+	<img src="{% static 'logo2.jpeg' %}" style="width: 20%; padding: 12px;">
+	<nav class="navbar navbar-default navbar-expand-lg navbar-light">
+		<div class="navbar-header d-flex col">
+					
+			<button type="button" data-target="#navbarCollapse" data-toggle="collapse" class="navbar-toggle navbar-toggler ml-auto">
+				<span class="navbar-toggler-icon"></span>
+				<span class="icon-bar"> </span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+		</div>
+		<!-- Collection of nav links, forms, and other content for toggling -->
+		<div id="navbarCollapse" class="collapse navbar-collapse">
+			<ul class="nav navbar-nav navbar-left ml-auto">
+				<li class="nav-item"><a href="#" class="nav-link">Home</a></li>			
+				<li class="nav-item dropdown">
+					<a data-toggle="dropdown" class="nav-link dropdown-toggle" href="#">Menu<b class="caret"></b></a>
+					<ul class="dropdown-menu">					
+						{% if request.user.is_staff %}
+						<li><a href="{% url 'req:viewRequests' %}" class="dropdown-item">Pending Requests</a></li>
+						<li><a href="{% url 'home:viewRecords'%}" class="dropdown-item"> View Records </a></li>
+						{% endif %}
+						<li><a href="#" class="dropdown-item">Available Time-slots</a></li>
+					</ul>
+				</li>
+				<li class="nav-item "><a href="https://mail.google.com/mail/?view=cm&fs=1&to=mananshi.v@ahduni.edu.in&cc=bhavya.p@ahduni.edu.in" class="nav-link">Contact</a></li>
+				
+			</ul>		
+			<ul class="nav navbar-nav navbar-right ml-auto">			
+				<li type="button" class="nav-item dropdown" data-toggle="tooltip" data-placement="bottom" title="Search">
+					<a data-toggle="dropdown" class="nav-link dropdown-toggle" href="#"><i class="fa fa-search"></i></a>
+					<a data-toggle="dropdown" class="nav-link dropdown-toggle hide" href="#"><i class="fa fa-close"></i></a>
+					<ul class="dropdown-menu">
+						<li>
+							<form  action = "{% url 'home:homePage' 0 %}" method = "post">
+								<div class="input-group search-box">
+									
+									<input type="date" id="datepicker" class="form-control" min = "{{date}}" max = "{{max_date}}" value = "{{date}}">
+									{% if request.user.is_staff %}
+										<script>
+											document.getElementById("datepicker").removeAttribute("min")
+										</script>
+									{% endif %}				
+
+										<p style="text-align:center;">Search by Room number</p>
+										<input type="text" id="room_search" class="form-control" placeholder="Search by room number" name = "room" value = "{{room}}">
+										<p style="text-align: center;">Or<br>Search by time slot</p>
+										<p style="text-align: left;">From:</p>
+										<input type="time" id="timeFrom" class="form-control" placeholder="from" name = "from" value = "{{from}}"><br>
+										<p style="text-align: left;">To:</p>
+										<input type="time" id="timeTo" class="form-control" placeholder="from" name = "to" value = "{{to}}">
+									
+										<span class="input-group-btn">
+											<button type="submit" class="btn btn-primary"><i class="fa fa-search"></i></button>
+										</span>
+								</div>
+							</form>                        
+						</li>
+					</ul>
+				</li>
+				
+				<li type="button" class="nav-item" data-toggle="tooltip" data-placement="bottom" title="Logout"><a href="{% url 'db:user_logout' %}" class="nav-link"><i class="fa fa-sign-out"></i></a></li>
+				
+			</ul>
+	</div>
+	</nav>
+	<script>
+		$(document).ready(function(){
+		var dropdown = $(".navbar-right .dropdown");
+		var toogleBtn = $(".navbar-right .dropdown-toggle");
+		
+		// Toggle search and close icon for search dropdown
+		dropdown.on("show.bs.dropdown", function(e){
+			toogleBtn.toggleClass("hide");
+		});
+		dropdown.on("hide.bs.dropdown", function(e){
+			toogleBtn.addClass("hide");
+			toogleBtn.first().removeClass("hide");
+		});
+	});
+	</script>
+	<div class="table-responsive" style="background-color: azure;">
+		
+		<div class="alert alert-warning alert-dismissible fade in" style="text-align: center;">
+			<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+			<strong>Welcome! </strong> {{request.user.username}}
+		  </div>
+
+		<h2>Available Rooms</h2>
+
+		{% if empty_slots %}
+			<table id="customers" style="width:auto; min-width: 50%; background-color: snow;">
+					<tr>
+						<th>Room No.</th>
+						<td style="background-color: #4CAF50; color: white;">Time Slot</td>
+					</tr>
+
+					{% for room_no, rec in empty_slots.items %}
+						<tr >
+							<td rowspan = "{rec|length}"> {{ room_no }} </td> <!--  Room no.  --> 
+							<td>
+								{% for entries in rec %}
+									<!--  time slot  -->
+									<button type="button" class="open" data-toggle="modal" data-target="#myModal" id = "{{ entries.0|time:'H:i' }} {{ entries.1|time:'H:i' }} {{room_no}}">
+										{{ entries.0 }} - {{ entries.1 }}
+									</button> 
+									<br>
+								{% endfor %}
+							</td>	
+						</tr>
+					{% endfor %}
+			</table>
+		{% else %}
+			<p> No rooms empty </p>
+		{% endif %}
+
+	</div>
+	<div id="myModal" class="modal fade" role="dialog">
+		<div class="modal-dialog">
+			<div class="modal-header" style="padding: 4%; background-color: white; color: #6A6A6A; font-family: 'Crete Round', serif;">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title">Send Request</h4>
+			</div>
+			<form method = "POST" action = "{% url 'req:makeRequest'%}">
+				<div class="modal-body" style="padding: 4%; background-color: white; color: #6A6A6A; font-family: 'Crete Round', serif;">
+						<input type = "hidden" id = "date" name = "date" value = "{{date}}" required><br>
+						Time-slot<br>
+						From:<input type="time" id="timeFromReq" class="form-control" name = "from" value = "" required>
+						To:<input type="time" id="timeToReq" class="form-control" name = "to" value="" required> 
+						Event: <input type = "text" id = "event" name = "event" required><br>
+						<input type = "hidden" name ="username" value = "{{request.user.username}}">
+						Room Number:<input type="text" id="room" class="form-control" placeholder="Room number" name = "room" required readonly>
+						Event details:<input type="text" id="description" class="form-control" placeholder="Event details" name = "details" required>  
+				</div>
+				<div class="modal-footer">
+					<button type="submit" class="submit" data-placement="submit">Submit</button>
+				</div>
+			</form>
+		</div>
+	</div>
+	<script>
+		$('#myModal').on('show.bs.modal', function(e) {
+			id_arr = e.relatedTarget.id.split(" ");
+			from = id_arr[0];
+			to = id_arr[1];
+			room_num = id_arr[2];
+			
+			var room_default = document.createAttribute("value");
+			room_default.value = room_num;
+			document.getElementById("room").setAttributeNode(room_default);
+			
+			document.getElementById("timeFromReq").value = from;
+			document.getElementById("timeToReq").value = to
+			
+			var min_time_from = document.createAttribute("min");
+			min_time_from.value = from;
+			document.getElementById("timeFromReq").setAttributeNode(min_time_from);
+			var min_time_to = document.createAttribute("min");
+			min_time_to.value = from;
+			document.getElementById("timeToReq").setAttributeNode(min_time_to);
+
+			var max_time_from = document.createAttribute("max");
+			max_time_from.value = to;
+			var max_time_to = document.createAttribute("max");
+			max_time_to.value = to;
+			document.getElementById("timeFromReq").setAttributeNode(max_time_from);
+			document.getElementById("timeToReq").setAttributeNode(max_time_to);
+
+		});
+	</script>
+</body>
+</html>                                                        

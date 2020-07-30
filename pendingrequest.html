@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+{% load static %}
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pending Requests</title>
+<link href="https://fonts.googleapis.com/css?family=Varela+Round" rel="stylesheet">
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link href="{% static 'pendingrequest.css' %}" rel="stylesheet" type="text/css">
+</head> 
+<body style="background-color: azure;">
+	<img src="{% static 'logo2.jpeg' %}" style="width: 20%; padding: 12px;">
+<nav class="navbar navbar-default navbar-expand-lg navbar-light" style="color: white;">
+	<div class="navbar-header d-flex col">
+		  		
+		<button type="button" data-target="#navbarCollapse" data-toggle="collapse" class="navbar-toggle navbar-toggler ml-auto">
+			<span class="navbar-toggler-icon"></span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+		</button>
+	</div>
+	<!-- Collection of nav links, forms, and other content for toggling -->
+	<div id="navbarCollapse" class="collapse navbar-collapse" style="background-color: midnightblue;">
+		<ul class="nav navbar-nav navbar-left ml-auto" style="color: whitesmoke;">
+			<li class="nav-item"><a href="#" class="nav-link">Home</a></li>			
+			<li class="nav-item dropdown">
+				<a data-toggle="dropdown" class="nav-link dropdown-toggle" href="#">Menu<b class="caret"></b></a>
+				<ul class="dropdown-menu">
+                	<li><a href="{% url 'home:viewRecords'%}" class="dropdown-item"> View Records </a></li>
+					<li><a href="{% url 'home:homePage' 0 %}" class="dropdown-item">Available Time-slots</a></li><!--href=home_page.html or whatever the name of the home page html file is-->
+				</ul>
+			</li>
+			<li class="nav-item "><a href="https://mail.google.com/mail/?view=cm&fs=1&to=mananshi.v@ahduni.edu.in&cc=bhavya.p@ahduni.edu.in" class="nav-link">Contact</a></li>
+		</ul>
+				
+		<ul class="nav navbar-nav navbar-right ml-auto">
+			<li type="button" class="nav-item dropdown" data-toggle="tooltip" data-placement="bottom" title="Search">
+				<a data-toggle="dropdown" class="nav-link dropdown-toggle" href="#"><i class="fa fa-search"></i></a>
+				<a data-toggle="dropdown" class="nav-link dropdown-toggle hide" href="#"><i class="fa fa-close"></i></a>
+				<ul class="dropdown-menu">
+					<li>
+                        <form action = "{% url 'req:viewRequests' %}" method ="post" >
+                        {% csrf_token %}
+                            <div class="input-group search-box">
+								
+                                    <input type="date" id="datepicker" class="form-control" name = "date" value = "{{dateCal}}">							
+                                    
+                                    <span class="input-group-btn">
+                                        <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i></button>
+								    </span>
+                            </div>
+                        </form>                        
+					</li>
+				</ul>
+			</li>
+			<li type="button" class="nav-item" data-toggle="tooltip" data-placement="bottom" title="Logout"><a href="{% url 'db:user_logout' %}" class="nav-link"><i class="fa fa-sign-out"></i></a></li>
+			
+		</ul>
+  </div>
+</nav>
+<script>
+	$(document).ready(function(){
+    var dropdown = $(".navbar-right .dropdown");
+    var toogleBtn = $(".navbar-right .dropdown-toggle");
+    
+    // Toggle search and close icon for search dropdown
+    dropdown.on("show.bs.dropdown", function(e){
+        toogleBtn.toggleClass("hide");
+    });
+    dropdown.on("hide.bs.dropdown", function(e){
+        toogleBtn.addClass("hide");
+        toogleBtn.first().removeClass("hide");
+    });
+});
+</script>
+<div style="background-color: azure" class="table-responsive">
+    <h2>Pending Request</h2>
+<<<<<<< HEAD
+    <table id="customers" style="width:auto; min-width: 50%;background-color: white;">
+    <tr>
+        <th>Room No.</th>
+        <td style="background-color: #4CAF50; color: white;">Time Slot</td>
+    </tr>
+
+    
+    {% csrf_token %}
+    <input type = "hidden" name = "date" value = "{{date}}">
+
+        {% for room,data in pendingReq.items %}
+            {% for clash_block in data %}
+=======
+    {% if pendingReq %}
+        <table id="customers" style="width:auto; min-width: 50%;">
+>>>>>>> eabf67a1d5d367c115ced9dbf01480778af36191
+            <tr>
+                <th>Room No.</th>
+                <td style="background-color: #4CAF50; color: white;">Time Slot</td>
+            </tr>
+            
+            {% for room,data in pendingReq.items %}
+                {% for clash_block in data %}
+                    <tr>
+                        <td rowspan = "{{ clash_block|length }}"> {{ room }} </td>
+                        <td>
+                            <button data-toggle="popover" data-container="body" data-placement="right" type="button" data-html="true" href="#"  id="{{clash_block.0.id}}">
+                            {{clash_block.0.from_ts}} - {{clash_block.0.to_ts}}
+                            </button>
+                            <div id = "popover{{clash_block.0.id}}" class = "hide">
+                                <p>Details:{{clash_block.0.details}}</p>
+                                <p>Requested by:{{clash_block.0.requested_by}}</p>
+
+                                <form method = "post" action = "{% url 'req:requestAction' %}">
+                                {% csrf_token %}
+                                    <input type="submit" value="reject" name="status">
+                                    <input type="submit" value="accept" name="status">                                <input type="hidden" name="id" value={{ clash_block.0.id }}>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>   
+                        {% if clash_block|length > 1 %}
+                            {% for req in clash_block %}
+                                {% if req is not clash_block.0 %}
+                                    <tr>
+                                        <td>
+                                            <button data-toggle="popover" data-container="body" data-placement="right" type="button" data-html="true" href="#"  id="{{req.id}}">
+                                                {{req.from_ts}} - {{req.to_ts}}
+                                            </button>
+
+                                            <div id = "popover{{req.id}}" class = "hide">
+                                                <p>Details:{{ req.details }}</p>
+                                                <p>Requested by:{{ req.requested_by }}</p>
+                                                <form method = "post" action = "{% url 'req:requestAction' %}">
+                                                {% csrf_token %}
+                                                    <input type="submit" value="reject" name="status">
+                                                    <input type="submit" value="accept" name="status">
+                                                    <input type="hidden" name="id" value={{ req.id }}>
+                                                </form>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                {% endif %}
+                            {% endfor %}
+                        {% endif %}
+                {% endfor %}
+            {% endfor %}
+        </table>
+    {% else %}
+    <p> No pending request</p>
+    {% endif %}
+</div>
+	
+    
+
+    <script>
+    $("[data-toggle=popover]").each(function(i, obj) {
+
+        $(this).popover({
+        html: true,
+        content: function() {
+                var id = $(this).attr('id')
+                return $('#popover' + id).html();
+            }
+        });
+
+    });
+    </script>
+</body>
+</html>                                                        
